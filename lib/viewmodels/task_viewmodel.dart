@@ -19,6 +19,11 @@ class TaskViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateTask(Task task) {
+    taskProvider.updateTask(task);
+    notifyListeners();
+  }
+
   void removeTask(Task task) {
     taskProvider.removeTask(task);
     notifyListeners();

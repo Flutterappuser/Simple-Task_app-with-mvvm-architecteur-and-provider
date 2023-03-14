@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/models/task_model.dart';
 import '/viewmodels/task_viewmodel.dart';
+import 'package:uuid/uuid.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({Key? key}) : super(key: key);
@@ -53,11 +54,10 @@ class TaskListScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: titleController,
-                decoration: InputDecoration(
-                  hintText: 'Title',
-                ),
-              ),
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    hintText: 'Description',
+                  )),
               SizedBox(height: 8),
               TextField(
                 controller: descriptionController,
@@ -77,11 +77,13 @@ class TaskListScreen extends StatelessWidget {
             TextButton(
               child: Text('Save'),
               onPressed: () {
+                final Uuid _uuid = Uuid();
                 final title = titleController.text.trim();
                 final description = descriptionController.text.trim();
 
                 if (title.isNotEmpty && description.isNotEmpty) {
                   final task = Task(
+                    id: _uuid.v4(),
                     title: title,
                     description: description,
                   );
